@@ -2,29 +2,106 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>YourName Photography | Portfolio</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ruilin Photography | Portfolio</title>
+    
+    <style>
+        /* ================= 1. 基础设置（电影院视觉） ================= */
+        body {
+            background-color: #000000; /* 网页进去是纯黑色 */
+            color: #ffffff;            /* 文字默认为纯白色 */
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* 高级现代字体 */
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* ================= 2. 核心动画效果设置 ================= */
+        
+        /* 封面照片：逐渐显示（淡入） */
+        .cover-photo {
+            opacity: 0; /* 刚进去时完全透明（看不见） */
+            animation: fadeInImage 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+            animation-delay: 0.3s; /* 稍微等待0.3秒开始淡入，更有高级感 */
+            max-width: 80%;
+            max-height: 60vh;
+            object-fit: contain;
+            box-shadow: 0 0 30px rgba(255,255,255,0.05); /* 淡淡的投影 */
+        }
+
+        /* 其他跳转页面UI（标题和导航栏）：1秒后显示 */
+        .site-ui {
+            opacity: 0; /* 刚进去时看不见 */
+            text-align: center;
+            animation: fadeInUI 1.5s ease forwards;
+            animation-delay: 1.5s; /* 📢 核心设定：等待1.5秒（照片淡入到一半时）悄悄浮现 */
+            margin-top: 40px;
+        }
+
+        /* ================= 3. 动画运行轨迹（大白话：怎么变透明） ================= */
+        @keyframes fadeInImage {
+            from {
+                opacity: 0;
+                transform: scale(0.98); /* 微微有一点从小变大的放大效果，像呼吸一样 */
+            }
+            to {
+                opacity: 1;
+                transform: scale(1);
+            }
+        }
+
+        @keyframes fadeInUI {
+            from {
+                opacity: 0;
+                transform: translateY(10px); /* UI从下往上微微浮现 */
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* ================= 4. UI样式美化（让文字更好看） ================= */
+        h1 {
+            font-size: 1.8rem;
+            letter-spacing: 0.5em; /* 字间距拉开，变高级 */
+            text-transform: uppercase;
+            margin-bottom: 20px;
+            font-weight: 300;
+        }
+
+        .nav-links a {
+            color: #888888; /* 导航栏平时是优雅的灰色 */
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.2em;
+            margin: 0 15px;
+            transition: color 0.3s ease; /* 鼠标放上去变色时的过渡动画 */
+        }
+
+        .nav-links a:hover {
+            color: #ffffff; /* 鼠标放上去变成纯白色 */
+        }
+    </style>
 </head>
 <body>
 
-    <h1>YOUR NAME</h1>
-    
-    <p>
-        <a href="#"><b>[ PORTFOLIO ]</b></a> | 
-        <a href="#"><b>[ ABOUT ]</b></a> | 
-        <a href="#"><b>[ CONTACT ]</b></a>
-    </p>
-    
-    <hr> <h2>Selected Works</h2>
-    
-    <img src="myphoto.jpg" alt="Sunset landscape photography by YourName" width="600">
+    <img src="myphoto.jpg" alt="Ruilin Photography Cover" class="cover-photo">
 
-    <p>Shot in Tibet, Golden Hour, 2026.</p>
-
-    <hr>
-
-    <h2>Contact</h2>
-    <p>Email: yourname@example.com</p>
-    <p>Instagram: @your_username</p>
+    <div class="site-ui">
+        <h1>RUILIN</h1>
+        
+        <div class="nav-links">
+            <a href="#">PORTFOLIO</a>
+            <a href="#">ABOUT</a>
+            <a href="#">CONTACT</a>
+        </div>
+    </div>
 
 </body>
 </html>
