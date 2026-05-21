@@ -191,6 +191,78 @@
             header { padding: 30px 20px; }
             nav { display: none; }
         }
+        /* ================= 📢 新增：About 区域样式 ================= */
+        .about-section {
+            padding: 150px 60px;
+            display: grid;
+            grid-template-columns: 1.2fr 1.3fr; /* 延续非对称分割 */
+            max-width: 1400px;
+            margin: 0 auto;
+            gap: 80px;
+            align-items: center;
+        }
+
+        .about-image-container {
+            width: 100%;
+        }
+
+        .about-photo {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 1px solid rgba(255, 255, 255, 0.05); /* 质感细边框 */
+        }
+
+        .about-content {
+            max-width: 500px;
+        }
+
+        .about-content h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 36px;
+            letter-spacing: 0.05em;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .about-content p {
+            color: #888888;
+            font-size: 15px;
+            line-height: 1.8;
+            font-weight: 300;
+            margin-bottom: 25px;
+            text-align: justify;
+        }
+
+        .details-grid {
+            margin-top: 40px;
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            padding-top: 30px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .details-item h3 {
+            font-size: 11px;
+            letter-spacing: 0.2em;
+            color: #ffffff;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .details-item p {
+            font-size: 13px;
+            color: #888888;
+            line-height: 1.5;
+            margin: 0;
+        }
+
+        /* 手机端适配 */
+        @media (max-width: 900px) {
+            .about-section { grid-template-columns: 1fr; padding: 80px 20px; gap: 40px; }
+            .details-grid { grid-template-columns: 1fr; }
+        }
     </style>
 </head>
 <body>
@@ -199,7 +271,7 @@
         <div class="brand">RUILIN MAO</div>
         <nav>
             <a href="#">Portfolio</a>
-            <a href="#">About</a>
+            <a href="#about">About</a>
             <a href="#">Photos</a>
             <a href="#">Contact</a>
         </nav>
@@ -244,6 +316,33 @@
             </div>
         </div>
     </section>
+<section class="about-section" id="about">
+        <div class="about-image-container">
+            <img src="about.jpg" alt="Ruilin Mao" class="about-photo">
+        </div>
 
+        <div class="about-content">
+            <h2>The Story Behind the Lens</h2>
+            <p>
+                I am Ruilin Mao, an independent photographer dedicated to capturing the raw traces of life and quiet, transient moments. 
+                When pressing the shutter, I seek no deliberate embellishment, but rather an honest narrative told through the natural flow of light and shadow.
+            </p>
+            <p>
+                Deeply influenced by minimalism, my visual language is a constant practice of subtraction amidst a complex world. 
+                Whether exploring vast natural landscapes, observing strangers in fleeting street encounters, or freezing the raw emotions beneath a gaze, I strive to find a static, lingering power that compels the viewer to pause and reflect.
+            </p>
+
+            <div class="details-grid">
+                <div class="details-item">
+                    <h3>Focus</h3>
+                    <p>Fine Art / Landscape<br>Street & Documentary<br>Humanistic Portraiture</p>
+                </div>
+                <div class="details-item">
+                    <h3>Based In</h3>
+                    <p>China / Available Worldwide</p>
+                </div>
+            </div>
+        </div>
+    </section>
 </body>
 </html>
