@@ -3,105 +3,195 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ruilin Photography | Portfolio</title>
+    <title>RUILIN MAO | Photography Portfolio</title>
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Inter:wght@300;400&display=swap" rel="stylesheet">
+
     <style>
-        /* ================= 1. 基础设置（电影院视觉） ================= */
+        /* 1. 全局样式：深度纯黑美学 */
+        :root {
+            --bg-color: #000000;
+            --text-main: #ffffff;
+            --text-muted: #888888;
+            --line-color: rgba(255, 255, 255, 0.15);
+            --transition-speed: 1.5s;
+        }
+
         body {
-            background-color: #000000; /* 网页进去是纯黑色 */
-            color: #ffffff;            /* 文字默认为纯白色 */
-            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif; /* 高级现代字体 */
+            background-color: var(--bg-color);
+            color: var(--text-main);
             margin: 0;
             padding: 0;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
+            font-family: 'Inter', sans-serif;
             overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
         }
 
-        /* ================= 2. 核心动画效果设置 ================= */
-        
-        /* 封面照片：逐渐显示（淡入） */
-        .cover-photo {
-            opacity: 0; /* 刚进去时完全透明（看不见） */
-            animation: fadeInImage 2.5s cubic-bezier(0.4, 0, 0.2, 1) forwards;
-            animation-delay: 0.3s; /* 稍微等待0.3秒开始淡入，更有高级感 */
-            max-width: 80%;
-            max-height: 60vh;
-            object-fit: contain;
-            box-shadow: 0 0 30px rgba(255,255,255,0.05); /* 淡淡的投影 */
+        /* 2. 导航栏样式：复刻 AI 稿中的细线设计 */
+        header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 40px 60px;
+            opacity: 0; /* 初始隐藏，用于动画 */
+            animation: fadeInUI var(--transition-speed) ease forwards;
+            animation-delay: 1.8s; /* UI 最后显示 */
         }
 
-        /* 其他跳转页面UI（标题和导航栏）：1秒后显示 */
-        .site-ui {
-            opacity: 0; /* 刚进去时看不见 */
-            text-align: center;
-            animation: fadeInUI 1.5s ease forwards;
-            animation-delay: 1.5s; /* 📢 核心设定：等待1.5秒（照片淡入到一半时）悄悄浮现 */
-            margin-top: 40px;
-        }
-
-        /* ================= 3. 动画运行轨迹（大白话：怎么变透明） ================= */
-        @keyframes fadeInImage {
-            from {
-                opacity: 0;
-                transform: scale(0.98); /* 微微有一点从小变大的放大效果，像呼吸一样 */
-            }
-            to {
-                opacity: 1;
-                transform: scale(1);
-            }
-        }
-
-        @keyframes fadeInUI {
-            from {
-                opacity: 0;
-                transform: translateY(10px); /* UI从下往上微微浮现 */
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* ================= 4. UI样式美化（让文字更好看） ================= */
-        h1 {
-            font-size: 1.8rem;
-            letter-spacing: 0.5em; /* 字间距拉开，变高级 */
+        .brand {
+            font-family: 'Playfair Display', serif;
+            font-size: 24px;
+            letter-spacing: 0.15em;
             text-transform: uppercase;
-            margin-bottom: 20px;
+            cursor: default;
+        }
+
+        nav {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+
+        nav a {
+            color: var(--text-main);
+            text-decoration: none;
+            font-size: 11px;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            font-weight: 400;
+            position: relative;
+            padding: 0 10px;
+            transition: color 0.3s;
+        }
+
+        /* 导航栏中间的细横线 */
+        nav a:not(:last-child)::after {
+            content: "";
+            position: absolute;
+            right: -15px;
+            top: 50%;
+            width: 20px;
+            height: 1px;
+            background-color: var(--line-color);
+        }
+
+        nav a:hover {
+            color: var(--text-muted);
+        }
+
+        /* 3. 核心布局：两栏式设计 */
+        main {
+            display: grid;
+            grid-template-columns: 1.1fr 1.4fr; /* 非对称比例 */
+            height: calc(100vh - 120px);
+            align-items: center;
+            padding: 0 60px;
+            gap: 60px;
+        }
+
+        /* 左侧文字区 */
+        .intro-text {
+            max-width: 420px;
+            margin-left: 20px;
+            opacity: 0;
+            animation: fadeInUI var(--transition-speed) ease forwards;
+            animation-delay: 1.8s;
+        }
+
+        .intro-text h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 42px;
+            line-height: 1.2;
+            margin-bottom: 30px;
+            font-weight: 400;
+        }
+
+        .intro-text p {
+            color: var(--text-muted);
+            font-size: 18px;
+            line-height: 1.6;
             font-weight: 300;
         }
 
-        .nav-links a {
-            color: #888888; /* 导航栏平时是优雅的灰色 */
-            text-decoration: none;
-            font-size: 0.85rem;
-            letter-spacing: 0.2em;
-            margin: 0 15px;
-            transition: color 0.3s ease; /* 鼠标放上去变色时的过渡动画 */
+        /* 右侧图片区 */
+        .photo-container {
+            position: relative;
+            width: 100%;
+            opacity: 0; /* 初始隐藏 */
+            animation: fadeInImage 2s ease-out forwards;
+            animation-delay: 0.5s; /* 图片先淡入 */
         }
 
-        .nav-links a:hover {
-            color: #ffffff; /* 鼠标放上去变成纯白色 */
+        .main-photo {
+            width: 100%;
+            height: auto;
+            display: block;
+            border: 1px solid rgba(255,255,255,0.05); /* 极细边框增加质感 */
+        }
+
+        /* 复刻 AI 稿中的图片右下角水印 */
+        .photo-watermark {
+            position: absolute;
+            bottom: 20px;
+            right: 20px;
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            color: rgba(255,255,255,0.4);
+            text-transform: uppercase;
+        }
+
+        /* 4. 动画关键帧 */
+        @keyframes fadeInImage {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUI {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* 响应式调整：手机端自动变为上下排列 */
+        @media (max-width: 900px) {
+            main {
+                grid-template-columns: 1fr;
+                height: auto;
+                padding-bottom: 100px;
+            }
+            header { padding: 30px 20px; }
+            nav { display: none; } /* 手机端隐藏导航，或可改为菜单按钮 */
         }
     </style>
 </head>
 <body>
 
-    <img src="myphoto.JPG" alt="Ruilin Photography Cover" class="cover-photo">
+    <header>
+        <div class="brand">RUILIN MAO</div>
+        <nav>
+            <a href="#">Portfolio</a>
+            <a href="#">About</a>
+            <a href="#">Photos</a>
+            <a href="#">Contact</a>
+        </nav>
+    </header>
 
-    <div class="site-ui">
-        <h1>RUILIN</h1>
-        
-        <div class="nav-links">
-            <a href="#">PORTFOLIO</a>
-            <a href="#">ABOUT</a>
-            <a href="#">CONTACT</a>
-        </div>
-    </div>
+    <main>
+        <section class="intro-text">
+            <h1>Documenting life<br>as it unfolds.</h1>
+            <p>
+                Honest perspectives,<br>
+                raw memories,<br>
+                and the quiet beauty of existence.
+            </p>
+        </section>
+
+        <section class="photo-container">
+            <img src="myphoto.JPG" alt="Selected Work" class="main-photo">
+            <div class="photo-watermark">RUILIN MAO 摄影</div>
+        </section>
+    </main>
 
 </body>
 </html>
