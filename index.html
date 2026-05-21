@@ -18,6 +18,11 @@
             --line-color: rgba(255, 255, 255, 0.15);
         }
 
+        /* 📢 让整个页面内的锚点跳转变得极其平滑 */
+        html {
+            scroll-behavior: smooth;
+        }
+
         body {
             background-color: var(--bg-color);
             color: var(--text-main);
@@ -122,13 +127,13 @@
             text-transform: uppercase;
         }
 
-        /* 4. 📢 新增：下方照片 Showcase 展示区 */
+        /* 4. 下方照片 Showcase 展示区 */
         .showcase-section {
-            padding: 150px 60px;
+            padding: 150px 60px 50px 60px; /* 调整底部间距，让它自然过渡到矩阵区 */
             display: flex;
             flex-direction: column;
             align-items: center;
-            gap: 120px; /* 照片与照片之间的留白，拉开高级感 */
+            gap: 120px;
         }
 
         .showcase-title {
@@ -144,10 +149,9 @@
             text-align: center;
         }
 
-        /* 单张照片包装盒 */
         .showcase-item {
             width: 100%;
-            max-width: 900px; /* 控制展示照片的最大宽度 */
+            max-width: 900px;
             position: relative;
         }
 
@@ -158,7 +162,6 @@
             transition: transform 0.8s ease;
         }
 
-        /* 鼠标放上去时，照片会极其细微地放大，增加交互感 */
         .showcase-item:hover img {
             transform: scale(1.01);
         }
@@ -173,29 +176,87 @@
             text-transform: uppercase;
         }
 
-        /* 5. 动画效果 */
-        @keyframes fadeInImage {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* ================= 📢 插入：Portfolio 3列影像矩阵样式 ================= */
+        .portfolio-section {
+            padding: 150px 60px;
+            max-width: 1400px;
+            margin: 0 auto;
         }
 
-        @keyframes fadeInUI {
-            from { opacity: 0; transform: translateY(15px); }
-            to { opacity: 1; transform: translateY(0); }
+        .portfolio-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 14px;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 60px;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 15px;
+            text-align: center;
         }
 
-        /* 手机端适配 */
-        @media (max-width: 900px) {
-            .hero-section { grid-template-columns: 1fr; height: auto; padding: 40px 20px; }
-            .showcase-section { padding: 80px 20px; gap: 60px; }
-            header { padding: 30px 20px; }
-            nav { display: none; }
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px; 
         }
-        /* ================= 📢 新增：About 区域样式 ================= */
+
+        /* 鼠标移入画廊时，所有照片默认整体稍微变暗 */
+        .gallery-grid:hover .gallery-item {
+            opacity: 0.3;
+        }
+
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            background: #0a0a0a;
+            border: 1px solid rgba(255,255,255,0.03);
+            cursor: pointer;
+            transition: opacity 0.6s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* 鼠标悬停的那张单独照片恢复高亮 */
+        .gallery-item:hover {
+            opacity: 1 !important;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
+        }
+
+        /* 微微放大交互效果 */
+        .gallery-item:hover img {
+            transform: scale(1.03);
+        }
+
+        .item-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(to top, rgba(0,0,0,0.8), transparent);
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            display: flex;
+            justify-content: space-between;
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            color: #ccc;
+        }
+
+        .gallery-item:hover .item-overlay {
+            opacity: 1;
+        }
+
+        /* ================= 📢 升级：About 区域样式（英文排版微调） ================= */
         .about-section {
             padding: 150px 60px;
             display: grid;
-            grid-template-columns: 1.2fr 1.3fr; /* 延续非对称分割 */
+            grid-template-columns: 1.2fr 1.3fr;
             max-width: 1400px;
             margin: 0 auto;
             gap: 80px;
@@ -210,7 +271,7 @@
             width: 100%;
             height: auto;
             display: block;
-            border: 1px solid rgba(255, 255, 255, 0.05); /* 质感细边框 */
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .about-content {
@@ -232,6 +293,8 @@
             font-weight: 300;
             margin-bottom: 25px;
             text-align: justify;
+            hyphens: auto;              /* 📢 英文右侧边缘切齐 */
+            word-break: break-word;
         }
 
         .details-grid {
@@ -245,23 +308,40 @@
 
         .details-item h3 {
             font-size: 11px;
-            letter-spacing: 0.2em;
+            letter-spacing: 0.25em;    /* 📢 英文小标题包装盒 */
             color: #ffffff;
             text-transform: uppercase;
-            margin-bottom: 10px;
+            margin-bottom: 12px;
         }
 
         .details-item p {
             font-size: 13px;
             color: #888888;
-            line-height: 1.5;
+            line-height: 1.6;
             margin: 0;
+        }
+
+        /* 5. 动画效果 */
+        @keyframes fadeInImage {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes fadeInUI {
+            from { opacity: 0; transform: translateY(15px); }
+            to { opacity: 1; transform: translateY(0); }
         }
 
         /* 手机端适配 */
         @media (max-width: 900px) {
+            .hero-section { grid-template-columns: 1fr; height: auto; padding: 40px 20px; }
+            .showcase-section { padding: 80px 20px; gap: 60px; }
+            .portfolio-section { padding: 80px 20px; }
+            .gallery-grid { grid-template-columns: 1fr; gap: 20px; }
             .about-section { grid-template-columns: 1fr; padding: 80px 20px; gap: 40px; }
             .details-grid { grid-template-columns: 1fr; }
+            header { padding: 30px 20px; }
+            nav { display: none; }
         }
     </style>
 </head>
@@ -270,7 +350,7 @@
     <header>
         <div class="brand">RUILIN MAO</div>
         <nav>
-            <a href="#">Portfolio</a>
+            <a href="#portfolio">Portfolio</a>
             <a href="#about">About</a>
             <a href="#">Photos</a>
             <a href="#">Contact</a>
@@ -316,7 +396,62 @@
             </div>
         </div>
     </section>
-<section class="about-section" id="about">
+
+    <section class="portfolio-section" id="portfolio">
+        <div class="portfolio-title">Works Showcase / 影像矩阵</div>
+
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="photo1.jpg" alt="Portfolio 1">
+                <div class="item-overlay">
+                    <span>01 / LANDSCAPE</span>
+                    <span>SILENCE</span>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="photo2.JPG" alt="Portfolio 2">
+                <div class="item-overlay">
+                    <span>02 / STREET</span>
+                    <span>THE STRANGER</span>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="photo3.jpg" alt="Portfolio 3">
+                <div class="item-overlay">
+                    <span>03 / PORTRAIT</span>
+                    <span>GAZE</span>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="myphoto.JPG" alt="Portfolio 4">
+                <div class="item-overlay">
+                    <span>04 / SELECTED</span>
+                    <span>COVER WORK</span>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="about.jpg" alt="Portfolio 5">
+                <div class="item-overlay">
+                    <span>05 / ATMOSPHERE</span>
+                    <span>CREATIVE SPACE</span>
+                </div>
+            </div>
+
+            <div class="gallery-item">
+                <img src="photo1.jpg" alt="Portfolio 6">
+                <div class="item-overlay">
+                    <span>06 / SHADOW</span>
+                    <span>LIGHT STUDY</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="about-section" id="about">
         <div class="about-image-container">
             <img src="about.jpg" alt="Ruilin Mao" class="about-photo">
         </div>
@@ -344,5 +479,6 @@
             </div>
         </div>
     </section>
+
 </body>
 </html>
